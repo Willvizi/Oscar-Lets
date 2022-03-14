@@ -1,5 +1,6 @@
 package br.com.willian.java;
 
+import java.io.FileReader;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -14,15 +15,13 @@ public class Aplicação {
 
     public Aplicação() {
     }
-
     public static void main(String[] args) {
+
 
 
         //lerarquivo
         ator = new LerArquivo("oscar_age_male.csv");
         atriz = new LerArquivo("oscar_age_female.csv");
-
-
 
 
         //desafio 1, ator mais jovem
@@ -35,7 +34,15 @@ public class Aplicação {
         atrizentre30e20();
 
         //desafio 4
-        //pessoasmaisoscar();
+        //List<Celebridades> todos = new ArrayList<>();
+        //todos.addAll(homens);
+        //todos.addAll(mulheres);
+        pessoasmaisoscar();
+
+        //desafio 5
+        //String nomeBuscado = inserirNome();
+        //buscarNome(nomeBuscado, ator);
+
     }
 
     private static void atormaisjovem(){
@@ -57,6 +64,7 @@ public class Aplicação {
     }
 
     private static void atrizentre30e20(){
+        ator.getCelebridadesList().stream();
         atriz.getCelebridadesList().stream()
                 .filter(atriz -> atriz.getIdade() >=20 && atriz.getIdade() <=30)
                 .map(Celebridades::getNome)
@@ -66,4 +74,35 @@ public class Aplicação {
                 .ifPresent(x -> System.out.println("A atriz entre 20 e 30 anos com mais oscars é: " + x.getKey() + " com " + x.getValue() + " Oscars " ));
     }
 
-}
+    private static void pessoasmaisoscar(){
+        System.out.println("Celebridades que ganharam mais de um oscar: ");
+        ator.getCelebridadesList().stream()
+                .map(Celebridades::getNome)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .filter(x -> x.getValue() >= 2)
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toList())
+                .forEach(x -> System.out.println(x.getKey() + " com " + x.getValue() + " Oscars "));
+
+
+    }
+
+ /*   public static String inserirNome(String Buscar) {
+        Scanner scanner = new Scanner((System.in));
+        return scanner.nextLine();
+    }
+
+    public static void  buscarNome(String retornoNome){
+        ator.getCelebridadesList().stream()
+                .filter(x -> x.getNome().trim().toUpperCase()
+                        .equals(retornoNome.trim().toUpperCase()));
+        if(retornoNome != null){
+            ator.getCelebridadesList()
+                    .forEach(x -> System.out.println(x.getClass()));
+        }*/
+
+
+    }
+
+
