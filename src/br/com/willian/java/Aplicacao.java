@@ -1,19 +1,17 @@
 package br.com.willian.java;
 
-import java.io.FileReader;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class Aplicação {
+public class Aplicacao {
 
     private static LerArquivo ator;
     private static LerArquivo atriz;
     private static LerArquivo todos;
     private static LerArquivo Agrupar;
 
-    public Aplicação() {
+    public Aplicacao() {
     }
     public static void main(String[] args) {
 
